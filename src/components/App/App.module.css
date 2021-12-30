@@ -1,0 +1,79 @@
+@layer base{
+    body{
+        background-color: #e1e1e1;
+    }
+
+    button{
+        @apply w-full px-2 py-2 mt-2 text-lg font-semibold text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300;
+    }
+}
+
+.wrapper{
+    @apply container bg-white border-solid rounded-xl mx-auto w-6/12 h-auto mt-10 shadow-2xl;
+}
+
+.title{
+    @apply text-6xl text-green-700 font-bold text-center pt-5 pb-5 italic;
+}
+
+.wrapperForm {
+    @apply flex-auto w-6/12 mx-auto;
+}
+
+.wrapperForm > input[type = "text"]{
+    @apply w-full px-4 py-4 mt-4 text-xl border-2 border-black;
+}
+
+/* .wrapperForm > button{
+    @apply w-full px-2 py-2 mt-2 text-lg font-semibold text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300;
+} */
+
+.searchFilter {
+    @apply flex-auto w-6/12 mx-auto mt-4;
+}
+
+.filterBtn{
+    @apply flex justify-between;
+}
+
+/* .filterBtn > button {
+    @apply w-full px-2 py-2 mt-2 text-lg font-semibold text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300;
+} */
+
+.filterBtn > * {
+    flex: 1 1 49%;
+}
+  
+.filterBtn > * + * {
+    margin-left: 0.5rem;
+}
+
+.hiddenText{
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+
+.searchFilter > input[type="text"] {
+    width: 5px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    background-image: url('../../images/search-icon.png');
+    background-position: 10px 12px; 
+    background-repeat: no-repeat;
+    margin-top: 10px;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+
+.searchFilter > input[type="text"]:focus{
+    width: 100%;
+}
