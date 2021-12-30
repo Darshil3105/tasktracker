@@ -3,7 +3,7 @@ import filterIcon from "../../images/filter-icon.png";
 
 function App() {
   return (
-    <div className = {classes.wrapper}>
+    <div className = {classes.wrappe}>
       <h1 className = {classes.title}>Task Tracker</h1>
 
       <form className = {classes.wrapperForm}>
