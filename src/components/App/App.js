@@ -1,9 +1,10 @@
 import classes from './App.module.css';
-import filterIcon from "../../images/filter-icon.png";
+import { FaRegEdit } from "react-icons/fa";
+import { MdOutlineDeleteSweep } from "react-icons/md";
 
 function App() {
   return (
-    <div className = {classes.wrappe}>
+    <div className = {classes.wrapper}>
       <h1 className = {classes.title}>Task Tracker</h1>
 
       <form className = {classes.wrapperForm}>
@@ -50,66 +51,68 @@ function App() {
 
       </div>
 
-      <div>
-        <h2 id="list-heading">4 Tasks</h2>
+      <div className = {classes.listHeading}>
+        <h2 id="list-heading">3 Tasks</h2>
       </div>
 
-      <ul
-        role="list"
 
-        aria-labelledby="list-heading"
-      >
-        <li >
-          <div>
-            <input id="todo-0" type="checkbox" defaultChecked={true} />
-            <label htmlFor="todo-0">
-              Eat
-            </label>
-          </div>
-          <div>
-            <button type="button">
-              Edit <span className="visually-hidden">Eat</span>
-            </button>
-            <button type="button">
-              Delete <span className="visually-hidden">Eat</span>
-            </button>
-          </div>
-        </li>
+      <div className = {classes.taskList}>
+        <ul
+          role="list"
+          aria-labelledby="list-heading"
+        >
+          <li>
+            <div className = {classes.listItems}>
+              <input id="todo-0" type="checkbox"/>
+              <label htmlFor="todo-0">
+                Eat
+              </label>
+            </div>
+            <div className = {classes.btnGroup}>
+              <button aria-label="Eat Edit" type="button">
+                <FaRegEdit className = {classes.editBtn} />
+              </button>
+              <button aria-label= "Eat Delete" type="button">
+                <MdOutlineDeleteSweep className = {classes.deleteBtn} />
+              </button>
+            </div>
+          </li>
 
-        <li >
-          <div>
-            <input id="todo-1" type="checkbox" />
-            <label htmlFor="todo-1">
-              Sleep
-            </label>
-          </div>
-          <div>
-            <button type="button">
-              Edit <span className="visually-hidden">Sleep</span>
-            </button>
-            <button type="button">
-              Delete <span className="visually-hidden">Sleep</span>
-            </button>
-          </div>
-        </li>
+          <li>
+            <div className = {classes.listItems}>
+              <input id="todo-1" type="checkbox" />
+              <label htmlFor="todo-1">
+                Sleep
+              </label>
+            </div>
+            <div className = {classes.btnGroup}>
+              <button aria-label="Sleep Edit" type="button">
+                <FaRegEdit className = {classes.editBtn} />
+              </button>
+              <button aria-label="Sleep Delete" type="button">
+                <MdOutlineDeleteSweep className = {classes.deleteBtn} />
+              </button>
+            </div>
+          </li>
 
-        <li >
-          <div>
-            <input id="todo-2" type="checkbox" />
-            <label htmlFor="todo-2">
-              Study
-            </label>
-          </div>
-          <div>
-            <button type="button">
-              Edit <span className="visually-hidden">Study</span>
-            </button>
-            <button type="button">
-              Delete <span className="visually-hidden">Study</span>
-            </button>
-          </div>
-        </li>
-      </ul>
+          <li>
+            <div className = {classes.listItems}>
+              <input id="todo-2" type="checkbox" />
+              <label htmlFor="todo-2">
+                Study
+              </label>
+            </div>
+            <div className = {classes.btnGroup}>
+              <button aria-label="Study Edit" type="button">
+                <FaRegEdit className = {classes.editBtn} />
+              </button>
+              <button aria-label= "Study Delete" type="button">
+                <MdOutlineDeleteSweep className = {classes.deleteBtn} />
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
 
     </div>
   );
