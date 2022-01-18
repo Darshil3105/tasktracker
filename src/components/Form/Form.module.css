@@ -1,0 +1,39 @@
+.wrapperForm {
+    @apply flex-auto w-8/12 mx-auto;
+}
+
+.wrapperForm > input[type = "text"]{
+    @apply w-full px-4 py-4 mt-4 text-xl border-2 border-black;
+}
+
+.wrapperForm > button{
+    @apply w-full px-2 py-2 mt-2 text-lg font-semibold text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300;
+}
+
+@media screen(mobile) {
+    .wrapperForm{
+        @apply w-10/12;
+    }
+
+    .wrapperForm > input[type = "text"]{
+        @apply text-lg;
+    }
+
+    .wrapperForm > button{
+        @apply text-base;
+    }
+}
+
+@media screen(laptop) {
+    .wrapperForm{
+        @apply w-8/12;
+    }
+
+    .wrapperForm > input[type = "text"]{
+        @apply text-xl;
+    }
+
+    .wrapperForm > button{
+        @apply text-lg;
+    }
+}

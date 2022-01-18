@@ -1,0 +1,68 @@
+.listItems {
+    @apply text-3xl font-semibold;
+}
+
+.listItems > label {
+    @apply ml-4 cursor-pointer;
+}
+
+.listItems > input[type="checkbox"] {
+    @apply w-6 h-6 border border-gray-300 rounded cursor-pointer;
+    filter: grayscale(80%);
+}
+
+.btnGroup{
+    @apply text-3xl;
+}
+
+.editBtn {
+    @apply text-green-600;
+}
+
+.deleteBtn {
+    @apply ml-4 text-red-600;
+}
+
+@media screen(mobile) {
+    .listItems{
+        @apply text-2xl;
+    }
+
+    .listItems > label {
+        @apply ml-2;
+    }
+    
+    .listItems > input[type="checkbox"] {
+        @apply w-5 h-5;
+    }
+
+    .btnGroup{
+        @apply text-2xl;
+    }
+
+    .deleteBtn {
+        @apply ml-2;
+    }
+}
+
+@media screen(laptop) {
+    .listItems{
+        @apply text-3xl;
+    }
+
+    .listItems > label {
+        @apply ml-4;
+    }
+    
+    .listItems > input[type="checkbox"] {
+        @apply w-6 h-6;
+    }
+
+    .btnGroup{
+        @apply text-3xl;
+    }
+
+    .deleteBtn {
+        @apply ml-4;
+    }
+}

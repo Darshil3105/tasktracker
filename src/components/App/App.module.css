@@ -12,18 +12,6 @@
     @apply text-6xl text-green-700 font-bold text-center pt-5 pb-5 italic;
 }
 
-.wrapperForm {
-    @apply flex-auto w-8/12 mx-auto;
-}
-
-.wrapperForm > input[type = "text"]{
-    @apply w-full px-4 py-4 mt-4 text-xl border-2 border-black;
-}
-
-.wrapperForm > button{
-    @apply w-full px-2 py-2 mt-2 text-lg font-semibold text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300;
-}
-
 .searchFilter {
     @apply flex-auto w-7/12 mx-auto mt-4;
 }
@@ -36,22 +24,16 @@
     @apply w-full px-2 py-2 mt-2 text-lg font-semibold text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300;
 }
 
+.filterBtn > button[aria-pressed="true"] {
+    text-decoration: underline;
+}
+
 .filterBtn > * {
     flex: 1 1 49%;
 }
   
 .filterBtn > * + * {
     margin-left: 0.5rem;
-}
-
-.hiddenText{
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    clip: rect(1px 1px 1px 1px);
-    clip: rect(1px, 1px, 1px, 1px);
-    white-space: nowrap;
 }
 
 .searchFilter > input[type="text"] {
@@ -90,27 +72,94 @@ ul > li{
     @apply flex justify-between mb-2;
 }
 
-.listItems {
-    @apply text-3xl font-semibold;
+@media screen(mobile) {
+    .wrapper{
+        @apply w-10/12;
+    }
+
+    .title{
+        @apply text-4xl;
+    }
+
+    .searchFilter {
+        @apply w-10/12;
+    }
+
+    .filterBtn > button{
+        @apply text-base;
+    }
+
+    .searchFilter > input[type="text"]{
+        font-size: 12px;
+        background-position: 8px 10px;
+        padding: 10px 18px 10px 38px;
+    }
+
+    .listHeading{
+        @apply text-3xl;
+    }
+
+    .taskList{
+        @apply pb-3;
+    }
+
+    .taskList > ul{
+        @apply w-52;
+    }
 }
 
-.listItems > label {
-    @apply ml-4 cursor-pointer;
+@media screen(mobileLG) {
+    .taskList > ul{
+        @apply w-60;
+    }
 }
 
-.listItems > input[type="checkbox"] {
-    @apply w-6 h-6 border border-gray-300 rounded cursor-pointer;
-    filter: grayscale(80%);
+@media screen(tablet) {
+    .wrapper{
+        @apply w-8/12;
+    }
+
+    .title{
+        @apply text-5xl;
+    }
+
+    .taskList > ul{
+        @apply w-72;
+    }
 }
 
-.btnGroup{
-    @apply text-3xl;
-}
+@media screen(laptop) {
+    .wrapper{
+        @apply w-6/12;
+    }
 
-.editBtn {
-    @apply text-green-600;
-}
+    .title{
+        @apply text-6xl;
+    }
 
-.deleteBtn {
-    @apply ml-4 text-red-600;
+    .searchFilter {
+        @apply w-7/12;
+    }
+
+    .filterBtn > button{
+        @apply text-lg;
+    }
+
+    .searchFilter > input[type="text"]{
+        font-size: 14px;
+        background-position: 10px 12px;
+        padding: 12px 20px 12px 40px;
+    }
+
+    .listHeading{
+        @apply text-4xl;
+    }
+
+    .taskList{
+        @apply pb-5;
+    }
+
+    .taskList > ul{
+        @apply w-96;
+    }
 }
