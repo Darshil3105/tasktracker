@@ -8,22 +8,27 @@ function TaskList(props){
         <>
             <li>
                 <div className={classes.listItems}>
-                    <input id="todo-0" type="checkbox" />
+                    <input
+                        id = {[props.id]}
+                        type="checkbox"
+                        defaultChecked = {props.completed}
+                    />
                     <label htmlFor="todo-0">
-                        Eat
+                        {props.taskName}
                     </label>
                 </div>
+                
                 <div className={classes.btnGroup}>
-                    <button aria-label="Eat Edit" type="button">
+                    <button aria-label = {props.taskName + "Edit"} type="button">
                         <FaRegEdit className={classes.editBtn} />
                     </button>
-                    <button aria-label="Eat Delete" type="button">
+                    <button aria-label = {props.taskName + "Delete"} type="button">
                         <MdOutlineDeleteSweep className={classes.deleteBtn} />
                     </button>
                 </div>
             </li>
 
-            <li>
+            {/* <li>
                 <div className={classes.listItems}>
                     <input id="todo-1" type="checkbox" />
                     <label htmlFor="todo-1">
@@ -55,7 +60,7 @@ function TaskList(props){
                         <MdOutlineDeleteSweep className={classes.deleteBtn} />
                     </button>
                 </div>
-            </li>
+            </li> */}
         </>
     );
 }
