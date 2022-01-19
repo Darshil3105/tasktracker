@@ -9,58 +9,25 @@ function TaskList(props){
             <li>
                 <div className={classes.listItems}>
                     <input
-                        id = {[props.id]}
+                        id = {props.id}
                         type="checkbox"
                         defaultChecked = {props.completed}
+                        onChange = {() => props.updateTaskCompleteStatus(props.id,props.taskName,props.completed)}
                     />
-                    <label htmlFor="todo-0">
+                    <label htmlFor = {props.id}>
                         {props.taskName}
                     </label>
                 </div>
-                
+
                 <div className={classes.btnGroup}>
-                    <button aria-label = {props.taskName + "Edit"} type="button">
+                    <button aria-label = {"Edit" + props.taskName} type="button">
                         <FaRegEdit className={classes.editBtn} />
                     </button>
-                    <button aria-label = {props.taskName + "Delete"} type="button">
+                    <button aria-label = {"Delete" + props.taskName} type="button" onClick = {() => props.deleteTask(props.id)}>
                         <MdOutlineDeleteSweep className={classes.deleteBtn} />
                     </button>
                 </div>
             </li>
-
-            {/* <li>
-                <div className={classes.listItems}>
-                    <input id="todo-1" type="checkbox" />
-                    <label htmlFor="todo-1">
-                        Sleep
-                    </label>
-                </div>
-                <div className={classes.btnGroup}>
-                    <button aria-label="Sleep Edit" type="button">
-                        <FaRegEdit className={classes.editBtn} />
-                    </button>
-                    <button aria-label="Sleep Delete" type="button">
-                        <MdOutlineDeleteSweep className={classes.deleteBtn} />
-                    </button>
-                </div>
-            </li>
-
-            <li>
-                <div className={classes.listItems}>
-                    <input id="todo-2" type="checkbox" />
-                    <label htmlFor="todo-2">
-                        Study
-                    </label>
-                </div>
-                <div className={classes.btnGroup}>
-                    <button aria-label="Study Edit" type="button">
-                        <FaRegEdit className={classes.editBtn} />
-                    </button>
-                    <button aria-label="Study Delete" type="button">
-                        <MdOutlineDeleteSweep className={classes.deleteBtn} />
-                    </button>
-                </div>
-            </li> */}
         </>
     );
 }
