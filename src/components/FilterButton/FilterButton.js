@@ -2,6 +2,9 @@ import React from "react";
 import classes from "./FilterButton.module.css";
 
 function FilterButton(props){
+
+    /* THIS COMPONENT IS TO CREATE BUTTONS */
+
     return(
         <button type="button" aria-pressed={props.isPressed} onClick = {() => props.setFilter(props.name)}>
             <span className={classes.hiddenText}>Show </span>

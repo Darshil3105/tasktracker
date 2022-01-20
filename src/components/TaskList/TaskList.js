@@ -1,32 +1,30 @@
-import React from "react";
-import { FaRegEdit } from "react-icons/fa";
-import { MdOutlineDeleteSweep } from "react-icons/md";
-import classes from "./TaskList.module.css";
+import React, { useState } from "react";
+import EditTaskView from "../EditTaskView/EditTaskView";
+import TaskListView from "../TaskListView/TaskListView";
 
 function TaskList(props){
+
+    /* STATES */
+    const [isEditing, setEditing] = useState(false);
+
+    /* DISPLAYS THE TASK EDITING FORM */
+    const editingView = (
+        <EditTaskView id = {props.id} taskName = {props.taskName} updateTaskFunction = {props.updateTask} completeStatus = {props.completed} cancelBtnPressed = {() => setEditing(false)} />
+    )
+
+    /* DISPLAYS THE TASK LIST */
+    const taskListView = (
+
+        <TaskListView id = {props.id} taskName = {props.taskName} updateTaskCompleteStatus = {props.updateTaskCompleteStatus} completeStatus = {props.completed} editBtnPressed = {() => setEditing(true)} deleteTask = {props.deleteTask} />
+    );
+
     return(
         <>
             <li>
-                <div className={classes.listItems}>
-                    <input
-                        id = {props.id}
-                        type="checkbox"
-                        defaultChecked = {props.completed}
-                        onChange = {() => props.updateTaskCompleteStatus(props.id,props.taskName,props.completed)}
-                    />
-                    <label htmlFor = {props.id}>
-                        {props.taskName}
-                    </label>
-                </div>
-
-                <div className={classes.btnGroup}>
-                    <button aria-label = {"Edit" + props.taskName} type="button">
-                        <FaRegEdit className={classes.editBtn} />
-                    </button>
-                    <button aria-label = {"Delete" + props.taskName} type="button" onClick = {() => props.deleteTask(props.id)}>
-                        <MdOutlineDeleteSweep className={classes.deleteBtn} />
-                    </button>
-                </div>
+                {
+                    /* BASED ON THE BOOLEAN VALUE OF THE ISEDITING STATE IT WILL DISPLAY THE RESPECTIVE VIEW TO THE USER */
+                    isEditing ? editingView : taskListView
+                }
             </li>
         </>
     );

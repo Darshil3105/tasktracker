@@ -17,9 +17,12 @@ const FILTER_BTN_NAME = Object.keys(FILTER_TYPE);
 
 function App() {
 
-  /* STATES */
+  /* STATES AND REF */
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState('All');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const inputSearch = useRef("");
 
   /* WHEN THE CHECKBOX IS CHECKED OR UNCHECKED FOLLOWING METHOD WILL BE CALLED */
   const updateTaskCompleteStatus = async (id,taskName,completed) => {
@@ -52,6 +55,18 @@ function App() {
     setTasks([...tasks, response.data]);
   }
 
+  /* FUNCTION UPDATES THE TASK BASED ON THE ID OF THE TASK */
+  const updateTask = async (id,taskName,completed) => {
+
+    /* THIS WILL UPDATE THE DATABASE WITH THE LATEST VALUES */
+    const response = await api.put(`/tasks/${id}`,{id,taskName,completed});
+
+    /* THIS WILL UPDATE THE STATE */
+    setTasks(tasks.map((task) => {
+      return task.id === id ? {...response.data} : task;
+    }))
+  }
+
   /* FUNCTION DELETES A PARTICULAR TASK BASED ON THE ID OF THE TASK */
   const deleteTask = async (id) => {
     await api.delete(`/tasks/${id}`);
@@ -72,6 +87,7 @@ function App() {
   ))
 
   useEffect(() => {
+    /* FUNCTION IS USED TO FETCH DATA FROM THE DATABASE AND SET THE STATE */
     const getAllTasks = async () => {
       const allTasks = await retrieveTasks();
 
@@ -85,25 +101,68 @@ function App() {
   },[tasks])
 
   /* CREATES A TASK LIST */
-  const taskList = tasks
-  .filter(FILTER_TYPE[filter])
-  .map(task => (
-    <TaskList
-      id = {task.id}
-      taskName = {task.taskName}
-      completed = {task.completed}
-      key = {task.id}
-      updateTaskCompleteStatus = {updateTaskCompleteStatus}
-      deleteTask = {deleteTask}
-    />
-  ))
+  const taskList = () => {
+
+    /* IF THE USER ENTERS SOMETHING IN THE SEARCH BAR AND ITS' LENGTH IS LESS THAN 1 THEN IT RETURNS ALL THE TASK ELSE IT WILL RETURN ONLY THE TASKS WHICH MATCHES THE CHARACTERS ENTERED BY THE USER  */
+    if(searchTerm.length < 1 ){
+      return(
+        tasks
+        .filter(FILTER_TYPE[filter])
+        .map(task => (
+          <TaskList
+            id={task.id}
+            taskName={task.taskName}
+            completed={task.completed}
+            key={task.id}
+            updateTaskCompleteStatus={updateTaskCompleteStatus}
+            updateTask={updateTask}
+            deleteTask={deleteTask}
+          />
+        ))
+      )
+    }
+    else{
+      return(
+        searchResults
+        .filter(FILTER_TYPE[filter])
+        .map(task => (
+          <TaskList
+            id={task.id}
+            taskName={task.taskName}
+            completed={task.completed}
+            key={task.id}
+            updateTaskCompleteStatus={updateTaskCompleteStatus}
+            updateTask={updateTask}
+            deleteTask={deleteTask}
+          />
+        ))
+      )
+    }
+  }
+
+  /* FUNCTION RETURNS ALL THE TASKS BASED ON THE USER INPUT IN THE SEARCH BAR */
+  const searchHandler = (searchTerm) => {
+    setSearchTerm(searchTerm);
+    if(searchTerm !== ""){
+      const newTaskList = tasks.filter((task) => {
+        const taskName = task.taskName.toLowerCase();
+        if(taskName.includes(searchTerm.toLowerCase())){
+          return Object.values(task)
+        }
+      });
+      setSearchResults(newTaskList);
+    }
+    else{
+      setSearchResults(tasks);
+    }
+  }
 
   /* BASED ON LENGTH OF THE TASTLIST THIS DISPLAY'S
      TASK NOUN AND THE HEADING WITH THE TOTAL NUMBER
      OF TASKS
   */
-  const tasksNoun = taskList.length > 1 ? 'tasks' : 'task';
-  const headText = `${taskList.length} ${tasksNoun}`;
+  const tasksNoun = taskList().length > 1 ? 'tasks' : 'task';
+  const headText = `${taskList().length} ${tasksNoun}`;
   const listHeadingRef = useRef(null);
 
   return (
@@ -117,7 +176,7 @@ function App() {
       {/* FORM TO ADD A NEW TASK WITH ADD BUTTON */}
       <Form addNewTask = {addNewTask} />
 
-      {/* FILTER BUTTONS AND SEARCH INPUT CONTAINER */}
+      {/* FILTER BUTTONS AND SEARCH BAR CONTAINER */}
       <div className = {classes.searchFilter}>
 
         {/* FILTER BUTTONS */}
@@ -125,8 +184,15 @@ function App() {
           {filterBtnList}
         </div>
           
-        {/* SEARCH INPUT */}
-        <input type = "text" name = 'search' autoComplete='off' /> 
+        {/* SEARCH BAR */}
+        <input
+          ref = {inputSearch}
+          type = "text"
+          name = 'search'
+          autoComplete='off'
+          value = {searchTerm}
+          onChange = {() => searchHandler(inputSearch.current.value)}
+        /> 
 
       </div>
 
@@ -141,7 +207,9 @@ function App() {
           role="list"
           aria-labelledby="list-heading"
         >
-          {taskList}
+          {
+            taskList()
+          }
         </ul>
       </div>
 
